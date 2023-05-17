@@ -1,0 +1,158 @@
+# Week 1, Day 2 Morning Discussion Questions
+
+## Instructions
+
+Take 30 minutes and answer the following questions together with your group.
+Take turns playing around with the code provided in Pry or IRB.
+
+## Questions
+
+1 . If the `Animal` class is defined like this:
+
+ruby
+class Animal
+
+  def species
+    "cat"
+  end
+
+end
+
+animal_instance = Animal.new
+puts animal_instance.species
+
+
+
+
+How would you:
+
+<ol type="a">
+  <li>Make a new instance of `Animal`?</li>
+  <li>`puts` out to the terminal, the species of that new `Animal` instance?</li>
+</ol>
+
+
+
+2 . Although we all know that cats are the best species, not all animals are
+cats (unfortunately). How could you change the `Animal` class so that an
+instance of `animal` can have its species set to any species at all?
+
+class Animal
+  def initialize(species)
+    @species = species
+  end
+
+  def species
+    @species
+  end
+end
+
+animal_instance = Animal.new("dog")
+puts animal_instance.species # This will print "dog"
+
+
+
+3 . We have the following class, and the following two instances of that class:
+
+ruby
+class Animal
+
+  def species
+    "cat"
+  end
+end
+
+maru = Animal.new
+hanna = Animal.new
+
+
+Given the above, what will the following return? Why?
+
+ruby
+maru == hanna
+
+
+maru == hanna will return false.
+
+In Ruby, the == operator checks if two objects are the same object, meaning they occupy the same space in memory. Even though maru and hanna are instances of the same class (Animal) and they behave in the same way (their species method returns the same value), they are still different objects, each with their own space in memory.
+
+
+4 . Given the following class:
+
+ruby
+class Animal
+  
+  def species 
+    my_species = "cat"
+  end
+
+  def say_species
+    puts "Hi! I'm a #{my_species}"
+  end
+end
+
+
+What will happen when we invoke the following code?
+
+ruby
+maru = Animal.new
+maru.say_species
+
+
+Is it broken? Why? How can you fix it?
+
+Yes, this code is broken. It will raise a NameError when you try to call maru.say_species.
+
+The reason for this is that my_species is a local variable in the species method, and it is not accessible outside of that method. Therefore, when you try to reference my_species in the say_species method, Ruby does not know what my_species is and raises an error.
+
+To fix this, you should use an instance variable instead of a local variable. Instance variables are accessible throughout the object, so you can set it in one method and then use it in another. Instance variables in Ruby are prefixed with an @ sign
+
+5 . Reverse engineer this code (i.e., write the class that will make the code
+work as invoked below):
+
+ruby
+frederick = Animal.new("bull")
+frederick.species
+# => "bull"
+
+
+
+*Hint:* How can you instantiate, or initialize, an instance of a class with
+a given value? What kind of variable would you use so that that value can be
+shared across instance methods within a class?
+
+class Animal
+  def initialize(species)
+    @species = species
+  end
+
+  def species
+    @species
+  end
+end
+
+In this class definition, the initialize method accepts one argument (species), which is used to set the @species instance variable. The species method then simply returns the value of this instance variable.
+
+With this class definition, frederick = Animal.new("bull") creates a new Animal object with "bull" as its species. frederick.species will then return "bull".
+
+6 . Given the following code:
+
+ruby
+class Animal
+  
+  def initialize(species)
+    @species = species
+  end
+
+end
+
+lil_bub = Animal.new("cat")
+
+
+What is the relationship between `lil_bub` and the `Animal` class?
+
+In the given code, lil_bub is an instance of the Animal class. When we use the new method with a class in Ruby, it creates a new instance (or object) of that class.
+
+The initialize method is a special method in Ruby classes that serves as a constructor, which is automatically called when an object is instantiated with the new method. In this case, it sets the @species instance variable to the string that is passed in when lil_bub is created ("cat").
+
+So in short, lil_bub is an object that is an instance of the Animal class, and its species is "cat".
